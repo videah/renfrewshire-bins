@@ -36,8 +36,8 @@ class HelpPage extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      splashColor: Colors.deepPurple.withAlpha(200),
-                      highlightColor: Colors.deepPurple.withAlpha(100),
+                      splashColor: Colors.deepPurple.withAlpha(120),
+                      highlightColor: Colors.deepPurple.withAlpha(80),
                       onTap: () {},
                     ),
                   ),
