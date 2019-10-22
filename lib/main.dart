@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flipperkit/flipper_client.dart';
 import 'package:flutter_flipperkit/flutter_flipperkit.dart';
 import 'package:renfrewshire_bins/pages/initial_route_page.dart';
+import 'package:renfrewshire_bins/pages/main_page.dart';
 import 'package:renfrewshire_bins/pages/postcode_page.dart';
 
 void main() {
@@ -24,7 +25,7 @@ class BinApp extends StatelessWidget {
       routes: {
         "/": (context) => InitialRoutePage(),
         "/setup": (context) => PostcodePage(),
-        "/main": (context) => Scaffold(),
+        "/main": (context) => MainPage(),
       },
     );
   }

@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:recase/recase.dart';
 
 class AddressPage extends StatelessWidget {
@@ -84,6 +85,7 @@ class AddressPage extends StatelessWidget {
                 String line =
                     "${address["line1"]} ${ReCase(address["line2"]).titleCase}";
                 String town = address["town"];
+                String postcode = address["postcode"];
                 return ListTile(
                   title: Text(line),
                   subtitle: Text(town),
@@ -101,7 +103,12 @@ class AddressPage extends StatelessWidget {
                             ),
                             FlatButton(
                               child: Text("YES"),
-                              onPressed: () {},
+                              onPressed: () async {
+                                var storage = Hive.box("details");
+                                await storage.put("address", line);
+                                await storage.put("postcode", postcode);
+                                Navigator.of(context).pushNamedAndRemoveUntil("/", ModalRoute.withName("/"));
+                              },
                             )
                           ],
                         );
