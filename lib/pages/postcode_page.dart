@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:renfrewshire_bins/pages/address.dart';
+import 'package:renfrewshire_bins/pages/address_page.dart';
 
 class PostcodePage extends StatelessWidget {
   final _postcodeController = TextEditingController();

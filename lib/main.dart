@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flipperkit/flipper_client.dart';
 import 'package:flutter_flipperkit/flutter_flipperkit.dart';
 import 'package:renfrewshire_bins/pages/initial_route_page.dart';
-import 'package:renfrewshire_bins/pages/postcode.dart';
+import 'package:renfrewshire_bins/pages/postcode_page.dart';
 
 void main() {
   FlipperClient flipper = FlipperClient.getDefault();
