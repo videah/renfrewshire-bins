@@ -12,7 +12,6 @@ class AddressPage extends StatelessWidget {
   const AddressPage({Key key, this.postcode}) : super(key: key);
 
   Future _getAddresses() async {
-
     // We just provide these headers to make the request look more authentic.
     // Not that I expect them to notice or anything.
     var headers = {
@@ -52,7 +51,10 @@ class AddressPage extends StatelessWidget {
     );
 
     // Fingers crossed.
-    Response response = await Dio().getUri(uri, options: Options(headers: headers));
+    Response response = await Dio().getUri(
+      uri,
+      options: Options(headers: headers),
+    );
 
     // We need to strip some brackets because the API returns a callback
     // method with the addresses as a parameter.
@@ -79,15 +81,39 @@ class AddressPage extends StatelessWidget {
               itemCount: snapshot.data.length,
               itemBuilder: (context, i) {
                 var address = Map<String, dynamic>.from(snapshot.data[i]);
-                String line = "${address["line1"]} ${ReCase(address["line2"]).titleCase}";
+                String line =
+                    "${address["line1"]} ${ReCase(address["line2"]).titleCase}";
                 String town = address["town"];
                 return ListTile(
                   title: Text(line),
                   subtitle: Text(town),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("Are you sure?"),
+                          content: Text("Is $line your address?"),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text("NO"),
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                            FlatButton(
+                              child: Text("YES"),
+                              onPressed: () {},
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  },
                 );
               },
               separatorBuilder: (context, i) {
-                return Divider(height: 0.0,);
+                return Divider(
+                  height: 0.0,
+                );
               },
             );
           }
