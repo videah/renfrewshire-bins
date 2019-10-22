@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flipperkit/flipper_client.dart';
 import 'package:flutter_flipperkit/flutter_flipperkit.dart';
+import 'package:renfrewshire_bins/pages/help_page.dart';
 import 'package:renfrewshire_bins/pages/initial_route_page.dart';
 import 'package:renfrewshire_bins/pages/main_page.dart';
 import 'package:renfrewshire_bins/pages/postcode_page.dart';
+import 'package:renfrewshire_bins/pages/settings_page.dart';
 
 void main() {
   FlipperClient flipper = FlipperClient.getDefault();
@@ -26,6 +28,8 @@ class BinApp extends StatelessWidget {
         "/": (context) => InitialRoutePage(),
         "/setup": (context) => PostcodePage(),
         "/main": (context) => MainPage(),
+        "/settings": (context) => SettingsPage(),
+        "/help": (context) => HelpPage(),
       },
     );
   }
