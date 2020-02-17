@@ -20,7 +20,7 @@ class HelpPage extends StatelessWidget {
         itemBuilder: (context, i) {
           var bin = bins[i];
           return ListTile(
-            title: Text("${bin["name"]}"),
+            title: Text("${bin["name"]}", style: TextStyle(fontWeight: FontWeight.bold),),
             subtitle: Text("${bin["desc"]}"),
             trailing: Image(
               image: AssetImage("assets/images/bin_${bin["name"].toLowerCase()}.jpg"),

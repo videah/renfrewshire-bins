@@ -14,12 +14,14 @@ description: Bin reminders for Renfrewshire
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   http: ^0.12.0+2
+  html: ^0.14.0+3
+  uuid: ^2.0.4
   basic_utils: ^2.2.4
   flutter_flipperkit: ^0.0.19
   dio: ^3.0.3
