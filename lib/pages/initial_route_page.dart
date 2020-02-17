@@ -14,7 +14,7 @@ class _InitialRoutePageState extends State<InitialRoutePage> {
 
   Future _initializeDatabase() async {
     // We store the info securely because why not?
-    // Kinda moot since the API requires ending details over in
+    // Kinda moot since the API requires sending details over in
     // plaintext but whatever.
     var keystore = FlutterSecureStorage();
     var read = await keystore.read(key: "hive-key");
