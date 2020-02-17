@@ -14,7 +14,7 @@ description: Bin reminders for Renfrewshire
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -23,11 +23,10 @@ dependencies:
   html: ^0.14.0+3
   uuid: ^2.0.4
   basic_utils: ^2.2.4
-  flutter_flipperkit: ^0.0.19
   dio: ^3.0.3
   recase: ^2.0.1
-  hive: ^1.1.1
-  hive_flutter: ^0.2.1
+  hive: ^1.4.0+1
+  hive_flutter: ^0.3.0+1
   flutter_secure_storage: ^3.3.1+1
   path_provider: ^1.4.0
 

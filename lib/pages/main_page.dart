@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
@@ -77,14 +78,14 @@ class _MainPageState extends State<MainPage> {
         nextBinCollection.collectionDate = nextDate;
 
         List<BinCollection> collections = [nextBinCollection];
-
         var futureBins = document
             .getElementsByClassName("collection collection--future")
             .first;
+
         futureBins.children.forEach((binRow) {
           var date =
               binRow.getElementsByClassName("collection__date").first.text;
-          var bins = binRow.getElementsByClassName("bins");
+          var bins = binRow.getElementsByClassName("bins").first.children;
           BinCollection collection = _parseBinCollection(bins);
           collection.collectionDate = date;
           collections.add(collection);
@@ -240,19 +241,27 @@ class _MainPageState extends State<MainPage> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               for (var bin in collection.bins)
-                                Container(
-                                  width: 65.0,
-                                  child: Column(
-                                    children: <Widget>[
-                                      Image(
-                                        image: AssetImage(
-                                          "assets/images/bin_${bin.name.toLowerCase().trim()}.png",
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+                                  child: Container(
+                                    width: 65.0,
+                                    child: Column(
+                                      children: <Widget>[
+                                        Image(
+                                          image: AssetImage(
+                                            "assets/images/bin_${bin.name.toLowerCase().trim()}.png",
+                                          ),
                                         ),
-                                      ),
-                                      Text("${bin.name.trim()}")
-                                    ],
+                                        Text(
+                                          "${bin.name.trim()}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
+                                )
                             ],
                           ),
                         ),
