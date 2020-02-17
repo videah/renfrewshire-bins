@@ -31,7 +31,20 @@ class SettingsPage extends StatelessWidget {
                 },
               );
             },
-          )
+          ),
+          ValueListenableBuilder(
+            valueListenable: Hive.box("settings").listenable(),
+            builder: (context, box, widget) {
+              return SwitchListTile(
+                title: Text("Hide Info Box"),
+                subtitle: Text("Hide the box reminding you to put the bins out before 7.00am"),
+                value: box.get("hideInfoBox") ?? false,
+                onChanged: (val) {
+                  box.put("hideInfoBox", val);
+                },
+              );
+            },
+          ),
         ],
       ),
     );

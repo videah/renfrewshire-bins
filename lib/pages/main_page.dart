@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
@@ -133,26 +135,32 @@ class _MainPageState extends State<MainPage> {
       ),
       body: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-            child: Card(
-              elevation: 4.0,
-              color: Colors.green,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.info_outline,
-                    color: Colors.white,
-                    size: 42,
-                  ),
-                  title: Text(
-                    "Please put your bin(s) out for collection before 7.00am.",
-                    style: TextStyle(color: Colors.white),
+          ValueListenableBuilder(
+            valueListenable: Hive.box("settings").listenable(),
+            builder: (context, box, widget) {
+              if ((box.get("hideInfoBox") ?? false)) return Container();
+              return Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                child: Card(
+                  elevation: 4.0,
+                  color: Colors.green,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.info_outline,
+                        color: Colors.white,
+                        size: 42,
+                      ),
+                      title: Text(
+                        "Please put your bin(s) out for collection before 7.00am.",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
+              );
+            }
           ),
           Expanded(
             child: RefreshIndicator(
