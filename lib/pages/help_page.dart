@@ -25,7 +25,9 @@ class HelpPage extends StatelessWidget {
             trailing: Image(
               image: AssetImage("assets/images/bin_${bin["name"].toLowerCase()}.png"),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed("/help/${bin["name"].toLowerCase()}");
+            },
           );
         },
         separatorBuilder: (context, i) {

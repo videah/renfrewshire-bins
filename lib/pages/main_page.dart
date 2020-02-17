@@ -253,20 +253,25 @@ class _MainPageState extends State<MainPage> {
                                   padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
                                   child: Container(
                                     width: 65.0,
-                                    child: Column(
-                                      children: <Widget>[
-                                        Image(
-                                          image: AssetImage(
-                                            "assets/images/bin_${bin.name.toLowerCase().trim()}.png",
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed("/help/${bin.name.toLowerCase().trim()}");
+                                      },
+                                      child: Column(
+                                        children: <Widget>[
+                                          Image(
+                                            image: AssetImage(
+                                              "assets/images/bin_${bin.name.toLowerCase().trim()}.png",
+                                            ),
                                           ),
-                                        ),
-                                        Text(
-                                          "${bin.name.trim()}",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        )
-                                      ],
+                                          Text(
+                                            "${bin.name.trim()}",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 )
