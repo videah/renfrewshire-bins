@@ -23,7 +23,7 @@ class HelpPage extends StatelessWidget {
             title: Text("${bin["name"]}", style: TextStyle(fontWeight: FontWeight.bold),),
             subtitle: Text("${bin["desc"]}"),
             trailing: Image(
-              image: AssetImage("assets/images/bin_${bin["name"].toLowerCase()}.jpg"),
+              image: AssetImage("assets/images/bin_${bin["name"].toLowerCase()}.png"),
             ),
             onTap: () {},
           );
