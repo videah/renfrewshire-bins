@@ -27,8 +27,7 @@ dependencies:
   recase: ^2.0.1
   hive: ^1.4.0+1
   hive_flutter: ^0.3.0+1
-  flutter_secure_storage: ^3.3.1+1
-  path_provider: ^1.4.0
+  path_provider: ^1.6.0
   flutter_widget_from_html: ^0.3.2+1
 
   # The following adds the Cupertino Icons font to your application.

@@ -35,6 +35,7 @@ class _MainPageState extends State<MainPage> {
     var form = document.getElementById("${prefix}FORM");
     var params = Uri.parse(form.attributes["action"]).queryParameters;
 
+    var box = Hive.box("details");
     FormData formData = FormData.fromMap({
       "${prefix}PAGESESSIONID": params["pageSessionId"],
       "${prefix}SESSIONID": params["fsid"],
@@ -42,10 +43,9 @@ class _MainPageState extends State<MainPage> {
       "${prefix}VARIABLES": "e30=",
       "${prefix}PAGENAME": "PAGE1",
       "${prefix}PAGEINSTANCE": 0,
-      "${prefix}PAGE1_ADDRESSSTRING":
-          "17 Langside Drive, Kilbarchan, Johnstone, Renfrewshire, PA10 2EL",
-      "${prefix}PAGE1_UPRN": "123027184",
-      "${prefix}PAGE1_ADDRESSLOOKUPPOSTCODE": "PA10 2EL",
+      "${prefix}PAGE1_ADDRESSSTRING": box.get("addressString"),
+      "${prefix}PAGE1_UPRN": box.get("uprn"),
+      "${prefix}PAGE1_ADDRESSLOOKUPPOSTCODE": box.get("postcode"),
       "${prefix}PAGE1_ADDRESSLOOKUPADDRESS": 7,
       "${prefix}FORMACTION_NEXT": "Load Address",
       "${prefix}PAGE1_FIELD13": false,

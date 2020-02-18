@@ -82,10 +82,13 @@ class AddressPage extends StatelessWidget {
               itemCount: snapshot.data.length,
               itemBuilder: (context, i) {
                 var address = Map<String, dynamic>.from(snapshot.data[i]);
+                print(address);
                 String line =
                     "${address["line1"]} ${ReCase(address["line2"]).titleCase}";
                 String town = address["town"];
                 String postcode = address["postcode"];
+                String addressString = address["addressString"];
+                String uprn = address["uprn"];
                 return ListTile(
                   title: Text(line),
                   subtitle: Text(town),
@@ -107,6 +110,8 @@ class AddressPage extends StatelessWidget {
                                 var storage = Hive.box("details");
                                 await storage.put("address", line);
                                 await storage.put("postcode", postcode);
+                                await storage.put("addressString", addressString);
+                                await storage.put("uprn", uprn);
                                 Navigator.of(context).pushNamedAndRemoveUntil("/", ModalRoute.withName("/"));
                               },
                             )
