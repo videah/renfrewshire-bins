@@ -27,7 +27,6 @@ class _MainPageState extends State<MainPage> {
   }
 
   Future _cacheImages() async {
-
     List<String> bins = [
       "green",
       "grey",
@@ -160,146 +159,99 @@ class _MainPageState extends State<MainPage> {
       body: Column(
         children: <Widget>[
           ValueListenableBuilder(
-              valueListenable: Hive.box("settings").listenable(),
-              builder: (context, box, widget) {
-                if ((box.get("hideInfoBox") ?? false)) return Container();
-                return Padding(
-                  padding:
-                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-                  child: Card(
-                    elevation: 4.0,
-                    color: Colors.green,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.info_outline,
-                          color: Colors.white,
-                          size: 42,
-                        ),
-                        title: Text(
-                          "Please put your bin(s) out for collection before 7.00am.",
-                          style: TextStyle(color: Colors.white),
-                        ),
+            valueListenable: Hive.box("settings").listenable(),
+            builder: (context, box, widget) {
+              if ((box.get("hideInfoBox") ?? false)) return Container();
+              return Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                child: Card(
+                  elevation: 4.0,
+                  color: Colors.green,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.info_outline,
+                        color: Colors.white,
+                        size: 42,
+                      ),
+                      title: Text(
+                        "Please put your bin(s) out for collection before 7.00am.",
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
-                );
-              }),
+                ),
+              );
+            },
+          ),
           Expanded(
-            child: Builder(builder: (context) {
-              if (_isLoading) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text("Loading Bins"),
-                    ),
-                  ],
-                );
-              }
-              return RefreshIndicator(
-                onRefresh: _getBins,
-                child: ListView.builder(
-                  itemCount: _binCollections.length,
-                  itemBuilder: (context, i) {
-                    BinCollection collection = _binCollections[i];
-                    if (i == 0) {
-                      return Column(
-                        children: <Widget>[
-                          ListTile(
-                            title: Text(
-                              "Your Next Collection",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
+            child: Builder(
+              builder: (context) {
+                if (_isLoading) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircularProgressIndicator(),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text("Loading Bins"),
+                      ),
+                    ],
+                  );
+                }
+                return RefreshIndicator(
+                  onRefresh: _getBins,
+                  child: ListView.builder(
+                    itemCount: _binCollections.length,
+                    itemBuilder: (context, i) {
+                      BinCollection collection = _binCollections[i];
+                      if (i == 0) {
+                        return Column(
+                          children: <Widget>[
+                            ListTile(
+                              title: Text(
+                                "Your Next Collection",
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            subtitle: Text("${collection.collectionDate}"),
-                            trailing: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(32.0)),
-                              color: Colors.green,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 16.0,
-                                    top: 10.0,
-                                    right: 16.0,
-                                    bottom: 10.0),
-                                child: Text(
-                                  "Due in 4 days",
-                                  style: TextStyle(color: Colors.white),
+                              subtitle: Text("${collection.collectionDate}"),
+                              trailing: Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(32.0)),
+                                color: Colors.green,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 16.0,
+                                      top: 10.0,
+                                      right: 16.0,
+                                      bottom: 10.0),
+                                  child: Text(
+                                    "Due in 4 days",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(right: 16.0, left: 16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                for (var bin in collection.bins)
-                                  Container(
-                                    width: 135.0,
-                                    height: 275.0,
-                                    child: Column(
-                                      children: <Widget>[
-                                        Image(
-                                          image: AssetImage(
-                                            "assets/images/bin_${bin.name.toLowerCase().trim()}.png",
-                                          ),
-                                        ),
-                                        Text(
-                                          "${bin.name.trim()}",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18.0,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                              ],
-                            ),
-                          ),
-                          Divider(),
-                        ],
-                      );
-                    } else {
-                      return Column(
-                        children: <Widget>[
-                          ListTile(
-                            title: Text(
-                              i == 1 ? "Your Future Collections" : "",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            subtitle: Text("${collection.collectionDate}"),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              right: 16.0,
-                              left: 16.0,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                for (var bin in collection.bins)
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8.0, right: 8.0, bottom: 8.0),
-                                    child: Container(
-                                      width: 65.0,
-                                      height: 140.0,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, left: 16.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  for (var bin in collection.bins)
+                                    Container(
+                                      width: 135.0,
+                                      height: 275.0,
                                       child: InkWell(
                                         onTap: () {
                                           Navigator.of(context).pushNamed(
-                                              "/help/${bin.name.toLowerCase().trim()}");
+                                            "/help/info",
+                                            arguments:
+                                            bin.name.toLowerCase().trim(),
+                                          );
                                         },
                                         child: Column(
                                           children: <Widget>[
@@ -312,24 +264,85 @@ class _MainPageState extends State<MainPage> {
                                               "${bin.name.trim()}",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
+                                                fontSize: 18.0,
                                               ),
                                             )
                                           ],
                                         ),
                                       ),
-                                    ),
-                                  )
-                              ],
+                                    )
+                                ],
+                              ),
                             ),
-                          ),
-                          Divider(),
-                        ],
-                      );
-                    }
-                  },
-                ),
-              );
-            }),
+                            Divider(),
+                          ],
+                        );
+                      } else {
+                        return Column(
+                          children: <Widget>[
+                            ListTile(
+                              title: Text(
+                                i == 1 ? "Your Future Collections" : "",
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Text("${collection.collectionDate}"),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                right: 16.0,
+                                left: 16.0,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  for (var bin in collection.bins)
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0, right: 8.0, bottom: 8.0),
+                                      child: Container(
+                                        width: 65.0,
+                                        height: 140.0,
+                                        child: InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).pushNamed(
+                                              "/help/info",
+                                              arguments:
+                                                  bin.name.toLowerCase().trim(),
+                                            );
+                                          },
+                                          child: Column(
+                                            children: <Widget>[
+                                              Image(
+                                                image: AssetImage(
+                                                  "assets/images/bin_${bin.name.toLowerCase().trim()}.png",
+                                                ),
+                                              ),
+                                              Text(
+                                                "${bin.name.trim()}",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            Divider(),
+                          ],
+                        );
+                      }
+                    },
+                  ),
+                );
+              },
+            ),
           )
         ],
       ),

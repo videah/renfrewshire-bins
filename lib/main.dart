@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:renfrewshire_bins/pages/help_information_page.dart';
 import 'package:renfrewshire_bins/pages/help_page.dart';
-import 'package:renfrewshire_bins/pages/help_pages/brown_help.dart';
 import 'package:renfrewshire_bins/pages/initial_route_page.dart';
 import 'package:renfrewshire_bins/pages/main_page.dart';
 import 'package:renfrewshire_bins/pages/postcode_page.dart';
@@ -41,7 +41,7 @@ class BinApp extends StatelessWidget {
             "/main": (context) => MainPage(),
             "/settings": (context) => SettingsPage(),
             "/help": (context) => HelpPage(),
-            "/help/brown": (context) => BrownHelp(),
+            "/help/info": (context) => HelpInformationPage(),
           },
         );
       },

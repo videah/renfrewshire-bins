@@ -26,7 +26,11 @@ class HelpPage extends StatelessWidget {
               image: AssetImage("assets/images/bin_${bin["name"].toLowerCase()}.png"),
             ),
             onTap: () {
-              Navigator.of(context).pushNamed("/help/${bin["name"].toLowerCase()}");
+              Navigator.of(context).pushNamed(
+                "/help/info",
+                arguments:
+                bin["name"].toLowerCase().trim(),
+              );
             },
           );
         },
