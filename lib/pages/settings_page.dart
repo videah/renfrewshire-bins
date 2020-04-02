@@ -12,24 +12,31 @@ class SettingsPage extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          ListTile(
-            title: Text("Change Address"),
-            subtitle: Text("If you have moved address"),
-            leading: CircleAvatar(
-              backgroundColor: Colors.deepPurple,
-              foregroundColor: Colors.white,
-              child: Icon(Icons.home),
-            ),
-            onTap: () {
-              Navigator.of(context).pushNamed("/setup");
+          ValueListenableBuilder(
+            valueListenable: Hive.box("details").listenable(),
+            builder: (context, box, widget) {
+              String address = box.get("addressString").split(",").first;
+              return ListTile(
+                title: Text("Change Address"),
+                subtitle: Text("$address"),
+                leading: CircleAvatar(
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+                  child: Icon(Icons.home),
+                ),
+                onTap: () {
+                  Navigator.of(context).pushNamed("/setup");
+                },
+              );
             },
           ),
+          Divider(),
           ValueListenableBuilder(
             valueListenable: Hive.box("settings").listenable(),
             builder: (context, box, widget) {
               return SwitchListTile(
                 title: Text("Enable Dark Mode"),
-                subtitle: Text("Testing"),
+                subtitle: Text("Make things a little easier on the eyes"),
                 secondary: CircleAvatar(
                   backgroundColor: Colors.deepPurple,
                   foregroundColor: Colors.white,
@@ -42,13 +49,14 @@ class SettingsPage extends StatelessWidget {
               );
             },
           ),
+          Divider(),
           ValueListenableBuilder(
             valueListenable: Hive.box("settings").listenable(),
             builder: (context, box, widget) {
               return SwitchListTile(
                 title: Text("Hide Info Box"),
                 subtitle: Text(
-                  "Hide the box reminding you to put the bins out before 7.00am",
+                  "Get rid of the box reminding you to put the bins out before 7.00am",
                 ),
                 secondary: CircleAvatar(
                   backgroundColor: Colors.deepPurple,
@@ -62,6 +70,7 @@ class SettingsPage extends StatelessWidget {
               );
             },
           ),
+          Divider(),
           ListTile(
             title: Text("About"),
             subtitle: Text("Application info & software licenses"),
