@@ -48,7 +48,8 @@ class SettingsPage extends StatelessWidget {
               return SwitchListTile(
                 title: Text("Hide Info Box"),
                 subtitle: Text(
-                    "Hide the box reminding you to put the bins out before 7.00am"),
+                  "Hide the box reminding you to put the bins out before 7.00am",
+                ),
                 secondary: CircleAvatar(
                   backgroundColor: Colors.deepPurple,
                   foregroundColor: Colors.white,
@@ -76,13 +77,14 @@ class SettingsPage extends StatelessWidget {
                 applicationVersion: "Version 1.0.0",
                 applicationLegalese: "Ruairidh 'videah' Carmichael",
                 applicationIcon: FlutterLogo(),
-                applicationDescription: const Text("Unofficial bin collection tracker for residents living in Renfrewshire\n\nThis app is not endorsed by Renfrewshire Council in anyway, I created this for my own personal use. It is entirely possible for operation of this app to discontinue at the wishes of Renfrewshire Council."),
+                applicationDescription: const Text(
+                    "Unofficial bin collection tracker for residents living in Renfrewshire\n\nThis app is not endorsed by Renfrewshire Council in anyway, I created this for my own personal use. It is entirely possible for operation of this app to discontinue at the wishes of Renfrewshire Council."),
                 children: [
                   LicensesPageListTile(
                     title: Text("Open Source Licenses"),
                     icon: Icon(Icons.share),
                   ),
-                ]
+                ],
               );
             },
           ),
