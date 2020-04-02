@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class HelpPage extends StatelessWidget {
 
-  List<Map> bins = [
+  final List<Map> bins = [
     {"name": "Green", "desc": "Plastic, cans, and glass"},
     {"name": "Grey", "desc": "Non-recyclable waste"},
     {"name": "Brown", "desc": "Garden and food waste"},

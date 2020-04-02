@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
 import 'package:renfrewshire_bins/models.dart';
+import 'package:renfrewshire_bins/widgets/bin_tile.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -208,7 +209,8 @@ class _MainPageState extends State<MainPage> {
                     itemBuilder: (context, i) {
                       BinCollection collection = _binCollections[i];
                       DateFormat format = DateFormat("EEEE d MMMM y");
-                      DateTime date = format.parse("${collection.collectionDate}");
+                      DateTime date =
+                          format.parse("${collection.collectionDate}");
                       DateTime now = DateTime.now();
 
                       var difference = now.difference(date).inDays;
@@ -252,39 +254,18 @@ class _MainPageState extends State<MainPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0, left: 16.0),
+                                right: 16.0,
+                                left: 16.0,
+                              ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   for (var bin in collection.bins)
-                                    Container(
+                                    BinTile(
+                                      name: bin.name.toLowerCase().trim(),
+                                      fontSize: 18.0,
                                       width: 135.0,
                                       height: 275.0,
-                                      child: InkWell(
-                                        onTap: () {
-                                          Navigator.of(context).pushNamed(
-                                            "/help/info",
-                                            arguments:
-                                            bin.name.toLowerCase().trim(),
-                                          );
-                                        },
-                                        child: Column(
-                                          children: <Widget>[
-                                            Image(
-                                              image: AssetImage(
-                                                "assets/images/bin_${bin.name.toLowerCase().trim()}.png",
-                                              ),
-                                            ),
-                                            Text(
-                                              "${bin.name.trim()}",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18.0,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
                                     )
                                 ],
                               ),
@@ -315,37 +296,17 @@ class _MainPageState extends State<MainPage> {
                                 children: <Widget>[
                                   for (var bin in collection.bins)
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 8.0, right: 8.0, bottom: 8.0),
-                                      child: Container(
-                                        width: 65.0,
-                                        height: 140.0,
-                                        child: InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).pushNamed(
-                                              "/help/info",
-                                              arguments:
-                                                  bin.name.toLowerCase().trim(),
-                                            );
-                                          },
-                                          child: Column(
-                                            children: <Widget>[
-                                              Image(
-                                                image: AssetImage(
-                                                  "assets/images/bin_${bin.name.toLowerCase().trim()}.png",
-                                                ),
-                                              ),
-                                              Text(
-                                                "${bin.name.trim()}",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                        padding: const EdgeInsets.only(
+                                          left: 8.0,
+                                          right: 8.0,
+                                          bottom: 8.0,
                                         ),
-                                      ),
-                                    ),
+                                        child: BinTile(
+                                          name: bin.name.toLowerCase().trim(),
+                                          fontSize: 14.0,
+                                          width: 65.0,
+                                          height: 140.0,
+                                        )),
                                 ],
                               ),
                             ),
