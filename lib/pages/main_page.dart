@@ -215,13 +215,13 @@ class _MainPageState extends State<MainPage> {
 
                       var difference = now.difference(date).inDays;
                       var labelText = "Unknown Error";
-                      if (difference == 0) {
+                      if (difference == 0 && now.day == date.day) {
                         labelText = "Due Today!";
-                      } else if (difference == 1) {
-                        labelText = "Due Tomorrow";
                       } else {
-                        labelText = "Due in $difference days";
+                        labelText = "Due Tomorrow";
                       }
+
+                      if (difference > 1) labelText = "Due in $difference days";
 
                       if (i == 0) {
                         return Column(
