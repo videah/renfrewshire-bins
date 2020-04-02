@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
@@ -114,7 +116,6 @@ class _MainPageState extends State<MainPage> {
           collections.add(collection);
         });
 
-        print("done");
         setState(() {
           _binCollections = collections;
           _isLoading = false;
@@ -206,6 +207,20 @@ class _MainPageState extends State<MainPage> {
                     itemCount: _binCollections.length,
                     itemBuilder: (context, i) {
                       BinCollection collection = _binCollections[i];
+                      DateFormat format = DateFormat("EEEE d MMMM y");
+                      DateTime date = format.parse("${collection.collectionDate}");
+                      DateTime now = DateTime.now();
+
+                      var difference = now.difference(date).inDays;
+                      var labelText = "Unknown Error";
+                      if (difference == 0) {
+                        labelText = "Due Today!";
+                      } else if (difference == 1) {
+                        labelText = "Due Tomorrow";
+                      } else {
+                        labelText = "Due in $difference days";
+                      }
+
                       if (i == 0) {
                         return Column(
                           children: <Widget>[
@@ -229,7 +244,7 @@ class _MainPageState extends State<MainPage> {
                                       right: 16.0,
                                       bottom: 10.0),
                                   child: Text(
-                                    "Due in 4 days",
+                                    labelText,
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
