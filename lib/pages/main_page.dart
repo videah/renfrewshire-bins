@@ -296,17 +296,18 @@ class _MainPageState extends State<MainPage> {
                                 children: <Widget>[
                                   for (var bin in collection.bins)
                                     Padding(
-                                        padding: const EdgeInsets.only(
-                                          left: 8.0,
-                                          right: 8.0,
-                                          bottom: 8.0,
-                                        ),
-                                        child: BinTile(
-                                          name: bin.name.toLowerCase().trim(),
-                                          fontSize: 14.0,
-                                          width: 65.0,
-                                          height: 140.0,
-                                        )),
+                                      padding: const EdgeInsets.only(
+                                        left: 8.0,
+                                        right: 8.0,
+                                        bottom: 8.0,
+                                      ),
+                                      child: BinTile(
+                                        name: bin.name.toLowerCase().trim(),
+                                        fontSize: 14.0,
+                                        width: 65.0,
+                                        height: 140.0,
+                                      ),
+                                    ),
                                 ],
                               ),
                             ),
