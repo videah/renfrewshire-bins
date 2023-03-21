@@ -19,11 +19,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.0+2
+  http: ">=0.12.0+2 <0.14.0"
   html: ^0.14.0+3
   uuid: ^2.0.4
-  basic_utils: ^2.2.4
-  dio: ^3.0.3
+  basic_utils: ">=2.2.4 <4.0.0"
+  dio: ">=3.0.3 <6.0.0"
   recase: ^2.0.1
   hive: ^1.4.0+1
   hive_flutter: ^0.3.0+1
